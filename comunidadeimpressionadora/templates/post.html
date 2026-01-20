@@ -1,0 +1,172 @@
+{% extends 'base.html' %} <!-- Herda o layout base (header, navbar, CSS, etc.) -->
+
+{% block body %} <!-- Início do conteúdo principal da página -->
+
+<div class="container mt-4"> <!-- Container central do Bootstrap -->
+
+  <div class="post-card"> <!-- Card visual do post -->
+
+    <div class="row"> <!-- Linha do grid Bootstrap -->
+
+      <!-- ========================= -->
+      <!-- COLUNA DO AUTOR DO POST -->
+      <!-- ========================= -->
+      <div class="col-md-3 post-autor text-center">
+      <!-- col-md-3 = ocupa 3 colunas em telas médias/grandes -->
+      <!-- post-autor = classe CSS personalizada -->
+      <!-- text-center = centraliza imagem e texto -->
+
+        <!-- Foto do autor -->
+        <img 
+          src="{{ url_for('static', filename='fotos_perfil/' ~ post.autor.foto_perfil) }}" 
+          alt="Foto do autor"
+          class="foto-perfil">
+        <!-- url_for carrega a imagem da pasta static -->
+        <!-- ~ concatena string com variável no Jinja -->
+
+        <!-- Nome do autor -->
+        <h6 class="mt-2">{{ post.autor.username }}</h6>
+
+        <!-- Lista de cursos do autor -->
+        {% for curso in post.autor.cursos.split(';') %}
+        <!-- Loop que separa os cursos usando ';' -->
+
+          <span class="badge bg-success curso-badge mt-1">
+            {{ curso }} <!-- Nome do curso -->
+          </span>
+
+        {% endfor %} <!-- FIM do loop de cursos -->
+
+      </div> <!-- Fim da coluna do autor -->
+
+      <!-- ========================= -->
+      <!-- COLUNA DO CONTEÚDO DO POST -->
+      <!-- ========================= -->
+      <div class="col-md-9 post-conteudo">
+      <!-- col-md-9 = ocupa o restante do espaço -->
+
+        <!-- Título do post -->
+          <h4>{{ post.titulo }}
+            <small class="text-muted" style="font-size: 15px;">
+              - Data de Criação: {{ post.data_criacao | brasilia_time }}
+              {% if current_user == post.autor %}
+              <!-- Link editar post -->
+                - <a href="{{ url_for('editar_post', post_id=post.id) }}">Editar post</a> / 
+              <!-- Link excluir post -->
+                  <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#ExcluirPost">Excluir post</a> <!--Text danger faz o link ficar vermelho-->
+              {% endif %}
+            </small>
+          </h4>
+
+        <!-- Corpo do post -->
+        <p>{{ post.corpo }}</p>
+
+      </div> <!-- Fim da coluna do conteúdo -->
+
+    </div> <!-- Fim da row -->
+
+  </div> <!-- Fim do post-card -->
+
+</div> <!-- Fim do container -->
+
+{% if form %}
+
+<div class="container form-criar-post mt-4"> <!-- Container Bootstrap + classe específica para CSS -->
+    
+        
+    <div class="row"> <!-- Linha do grid Bootstrap -->
+        <div class="col"> <!-- Coluna ocupando toda a largura -->
+
+            <form method="POST" action="" id="form_editarpost" class="border p-4 mt-2"> <!-- Formulário POST com borda, padding e margem -->
+                
+                {{ form.hidden_tag() }} <!-- Campo oculto obrigatório (CSRF token do Flask-WTF) -->
+
+                <legend>
+                    <h1>Editar Post</h1> <!-- Título da página -->
+                </legend>
+
+                <fieldset> <!-- Agrupa os campos do formulário -->
+
+                    <!-- ================= CAMPO TÍTULO ================= -->
+                    <div class="form-group"> <!-- Agrupamento do campo título -->
+
+                        {{ form.titulo.label(class="form-control-label") }} <!-- Label do campo título -->
+
+                        {% if form.titulo.errors %} <!-- Verifica se há erros no campo título -->
+
+                            {{ form.titulo(class="form-control is-invalid") }} <!-- Input com estilo de erro -->
+
+                            <div class="invalid-feedback"> <!-- Área para exibir mensagens de erro -->
+                                {% for erro in form.titulo.errors %} <!-- Percorre todos os erros -->
+                                    {{ erro }} <!-- Exibe o erro -->
+                                {% endfor %}
+                            </div>
+
+                        {% else %} <!-- Caso NÃO existam erros -->
+
+                            {{ form.titulo(class="form-control") }} <!-- Input normal -->
+
+                        {% endif %} <!-- Fim da verificação de erros -->
+
+                    </div>
+
+                    <!-- ================= CAMPO CORPO ================= -->
+                    <div class="form-group"> <!-- Agrupamento do campo corpo -->
+
+                        {{ form.corpo.label(class="form-control-label") }} <!-- Label do campo corpo -->
+
+                        {% if form.corpo.errors %} <!-- Verifica se há erros no corpo -->
+
+                            {{ form.corpo(class="form-control is-invalid") }} <!-- Textarea com erro -->
+
+                            <div class="invalid-feedback"> <!-- Mensagens de erro -->
+                                {% for erro in form.corpo.errors %} <!-- Percorre erros -->
+                                    {{ erro }} <!-- Exibe erro -->
+                                {% endfor %}
+                            </div>
+
+                        {% else %} <!-- Caso não haja erro -->
+
+                            {{ form.corpo(class="form-control") }} <!-- Textarea normal -->
+
+                        {% endif %} <!-- Fim da verificação -->
+
+                    </div>
+
+                </fieldset>
+
+                {{ form.botao_submit(class="btn btn-primary mt-3") }} <!-- Botão de envio -->
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
+
+<!-- Modal -->
+<div class="modal fade" id="ExcluirPost" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Excluir Post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4>
+          <p>Você quer realmente excluir este post?</p>
+        </h4>
+          <p>(Esta ação não poderá ser desfeita)</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <form method="POST" action="{{ url_for('excluir_post', post_id=post.id) }}"> 
+          <button type="submit" class="btn btn-danger">Excluir Post</button> <!--O type submit no botão, envia o formulario no banco de dados-->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} <!-- Fim do bloco body -->

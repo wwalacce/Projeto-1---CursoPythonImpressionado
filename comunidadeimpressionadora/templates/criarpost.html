@@ -1,0 +1,76 @@
+{% extends 'base.html' %} <!-- Herda toda a estrutura base do site -->
+
+{% block body %} <!-- Início do bloco principal da página -->
+
+<div class="container form-criar-post mt-4"> <!-- Container Bootstrap + classe específica para CSS -->
+    
+        
+    <div class="row"> <!-- Linha do grid Bootstrap -->
+        <div class="col"> <!-- Coluna ocupando toda a largura -->
+
+            <form method="POST" action="" class="border p-4 mt-2"> <!-- Formulário POST com borda, padding e margem -->
+                
+                {{ form.hidden_tag() }} <!-- Campo oculto obrigatório (CSRF token do Flask-WTF) -->
+
+                <legend>
+                    <h1>Criar Post</h1> <!-- Título da página -->
+                </legend>
+
+                <fieldset> <!-- Agrupa os campos do formulário -->
+
+                    <!-- ================= CAMPO TÍTULO ================= -->
+                    <div class="form-group"> <!-- Agrupamento do campo título -->
+
+                        {{ form.titulo.label(class="form-control-label") }} <!-- Label do campo título -->
+
+                        {% if form.titulo.errors %} <!-- Verifica se há erros no campo título -->
+
+                            {{ form.titulo(class="form-control is-invalid") }} <!-- Input com estilo de erro -->
+
+                            <div class="invalid-feedback"> <!-- Área para exibir mensagens de erro -->
+                                {% for erro in form.titulo.errors %} <!-- Percorre todos os erros -->
+                                    {{ erro }} <!-- Exibe o erro -->
+                                {% endfor %}
+                            </div>
+
+                        {% else %} <!-- Caso NÃO existam erros -->
+
+                            {{ form.titulo(class="form-control") }} <!-- Input normal -->
+
+                        {% endif %} <!-- Fim da verificação de erros -->
+
+                    </div>
+
+                    <!-- ================= CAMPO CORPO ================= -->
+                    <div class="form-group"> <!-- Agrupamento do campo corpo -->
+
+                        {{ form.corpo.label(class="form-control-label") }} <!-- Label do campo corpo -->
+
+                        {% if form.corpo.errors %} <!-- Verifica se há erros no corpo -->
+
+                            {{ form.corpo(class="form-control is-invalid") }} <!-- Textarea com erro -->
+
+                            <div class="invalid-feedback"> <!-- Mensagens de erro -->
+                                {% for erro in form.corpo.errors %} <!-- Percorre erros -->
+                                    {{ erro }} <!-- Exibe erro -->
+                                {% endfor %}
+                            </div>
+
+                        {% else %} <!-- Caso não haja erro -->
+
+                            {{ form.corpo(class="form-control") }} <!-- Textarea normal -->
+
+                        {% endif %} <!-- Fim da verificação -->
+
+                    </div>
+
+                </fieldset>
+
+                {{ form.botao_submit(class="btn btn-primary mt-3") }} <!-- Botão de envio -->
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %} <!-- Fim do bloco body -->

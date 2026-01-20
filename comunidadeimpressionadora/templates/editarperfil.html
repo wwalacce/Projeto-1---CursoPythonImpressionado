@@ -1,0 +1,107 @@
+{% extends 'perfil.html' %} <!-- Extende o template base.html para herdar sua estrutura -->
+
+
+
+{% block form_editar_perfil %}
+
+<div class="container">
+    
+    <hr> <!---->
+    
+      <div class="row"> 
+        <div class="col">
+          <form method="POST" action="" class="border p-4 mt-2" enctype="multipart/form-data"> <!-- Method post envia dados e action // 'enctype eh o parâmetro do tipo de arquivo a ser passado para a foto do perfil'  --> 
+            {{form.csrf_token}} <!-- Proteção contra CSRF - que é uma técnica de segurança para evitar ataques de solicitação cruzada -->
+            {{ form.hidden_tag() }}
+          <legend>
+            <h1>Editar Perfil</h1>
+          </legend>
+          
+            <fieldset> <!-- Fieldset agrupa elementos relacionados em um formulário -->
+
+               <div class ="form-group"> <!-- form-group agrupa rótulos e controles de formulário para melhor espaçamento -->
+
+                {{ form.username.label (class="form-control-label") }} <!-- Label escreve o texto do campo de username -->
+                  
+                  {% if form.username.errors %}
+                    {{ form.username (class="form-control is-invalid") }} <!-- form-control aplica estilos do Bootstrap-->
+                    <div class="invalid-feedback"> <!-- Invalid-feedback só funciona se antes dele tiver o is-invalid-->
+                      {% for erro in form_login.username.errors%}
+                        {{ erro }}
+                      {% endfor %}
+                    </div>
+                  
+                  {% else %}
+                    {{ form.username (class="form-control") }} <!-- form-control aplica estilos do Bootstrap ao campo de username -->
+                  {% endif %} 
+               
+              </div>
+
+              <!-- Formulário de login -->
+
+              <div class ="form-group"> <!-- form-group agrupa rótulos e controles de formulário para melhor espaçamento -->
+
+                {{ form.email.label (class="form-control-label") }} <!-- Label escreve o texto do campo de email -->
+                  
+                  {% if form.email.errors %}
+                    {{ form.email (class="form-control is-invalid") }} <!-- form-control aplica estilos do Bootstrap-->
+                    <div class="invalid-feedback"> <!-- Invalid-feedback só funciona se antes dele tiver o is-invalid-->
+                      {% for erro in form_login.email.errors%}
+                        {{ erro }}
+                      {% endfor %}
+                    </div>
+                  
+                  {% else %}
+                    {{ form.email (class="form-control") }} <!-- form-control aplica estilos do Bootstrap ao campo de email -->
+                  {% endif %} 
+              </div> 
+              
+              <!-- Editando foto do perfil -->
+
+              <div class ="form-group"> <!-- form-group agrupa rótulos e controles de formulário para melhor espaçamento -->
+                 {{ form.foto_perfil.label }}
+                 {{ form.foto_perfil(class="form-control-file") }}
+                 {% if form.foto_perfil.errors %}
+                    {% for erro in form.foto_perfil.errors %}
+                      <span class="text-danger">{{ erro }}</span> <br>
+                    {% endfor %}
+                 {% endif %}
+
+                 <!-- Sempre que for subir uma foto de perfil de um arquivo específico dentro do form.html dele, além do post, é preciso incluir um outro parâmtro pra q ele limite somente aos dois arquivos indicados    -->
+                
+              </div>
+
+              <hr>
+
+              <p>Cursos</p>
+              <!-- For para percorrer todos os campos que contenham o nome curso_ -->
+              {% for campo in form %}
+                {% if 'curso_' in campo.name %}
+
+                    <div class ="form-group">
+                      {{ campo (class="form-check-input") }}
+                      {{ campo.label (class="form-check-input-label") }}                     
+                    </div>
+
+                {% endif %}
+              {% endfor %}
+
+                
+
+            </fieldset>
+            {{ form.botao_submit_editarperfil (class="btn btn-primary mt-2") }} 
+          </form>
+        </div>
+      </div>    
+    
+   </div>    
+    
+
+{% endblock %}
+
+<!--Qndo faz a extensão de uma página/arquivo, só podemos criar blocos. ENtão vamos criar os blocos na página perfil e fazer o desenvolvimento do bloco aqui.
+
+- Criar a classe formulario no Forms
+- Importar o formulario no routs e no @app.route
+
+-->

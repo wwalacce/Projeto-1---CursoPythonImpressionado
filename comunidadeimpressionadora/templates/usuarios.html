@@ -1,0 +1,103 @@
+{% extends 'base.html' %} <!-- Herda toda a estrutura base (head, navbar, etc.) -->
+
+{% block head %}
+<title>Usuários - SENAPPEN</title> <!-- Define o título específico da página -->
+{% endblock %}
+
+{% block body %} <!-- Início do conteúdo principal da página -->
+
+<div class="container usuarios-wrapper mt-4">
+<!-- container = Bootstrap -->
+<!-- usuarios-wrapper = classe custom para layout -->
+<!-- mt-4 = margem superior -->
+
+  <h1 class="titulo-pagina">Usuários</h1>
+  <!-- Título principal da página -->
+
+  {% for usuario in lista_usuarios %}
+  <!-- Loop que percorre todos os usuários enviados pelo backend -->
+
+  <div class="usuario-card">
+  <!-- Card individual de cada usuário -->
+
+    <div class="row align-items-center">
+    <!-- row = grid do Bootstrap -->
+    <!-- align-items-center = alinha verticalmente ao centro -->
+
+      <!-- ========================= -->
+      <!-- COLUNA DA FOTO -->
+      <!-- ========================= -->
+      <div class="col-md-3 text-center">
+      <!-- col-md-3 = 3 colunas no desktop -->
+      <!-- text-center = centraliza conteúdo -->
+
+        <img 
+          src="{{ url_for('static', filename='fotos_perfil/' ~ usuario.foto_perfil) }}"
+          class="usuario-foto"
+          alt="Foto do usuário">
+        <!-- Imagem do perfil -->
+        <!-- usuario-foto = classe CSS personalizada -->
+
+      </div>
+
+      <!-- ========================= -->
+      <!-- COLUNA DOS DADOS -->
+      <!-- ========================= -->
+      <div class="col-md-9">
+      <!-- col-md-9 = restante da largura -->
+
+        <h4 class="usuario-nome">{{ usuario.username }}</h4>
+        <!-- Nome do usuário -->
+
+        <p class="usuario-email">{{ usuario.email }}</p>
+        <!-- Email do usuário -->
+
+        <!-- ========================= -->
+        <!-- BARRA DE ESTATÍSTICAS -->
+        <!-- ========================= -->
+        <div class="usuario-stats">
+        <!-- Container das estatísticas -->
+
+          <div class="stat-box">
+            <span class="stat-label">Cursos</span>
+
+            {% if 'Não Informado' in usuario.cursos %}
+              <span class="stat-numero">0</span>
+            {% else %}
+              <span class="stat-numero">
+                {{ usuario.cursos.count(';') + 1 }}
+              </span>
+            {% endif %}
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Posts</span> 
+            <span class="stat-numero">{{ usuario.contar_posts() }}</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- LISTA DE CURSOS -->
+    <!-- ========================= -->
+    <div class="usuario-cursos">
+      <strong>Cursos</strong><br>
+
+      {% for curso in usuario.cursos.split(';') %}
+        <span class="badge bg-success curso-badge">
+          {{ curso }}
+        </span>
+      {% endfor %}
+    </div>
+
+  </div>
+  <!-- Fim do card do usuário -->
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}

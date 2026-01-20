@@ -1,0 +1,64 @@
+{% extends 'base.html' %} <!-- Herda o layout base -->
+
+{% block body %} <!-- Início do conteúdo principal -->
+
+<div class="container post-wrapper mt-4">
+<!-- container = Bootstrap -->
+<!-- post-wrapper = limita largura e centraliza -->
+
+  {% for post in posts %} <!-- Loop para percorrer todos os posts -->
+
+  <div class="post-card">
+  <!-- post-card = card visual de cada post -->
+
+    <div class="row">
+    <!-- row = linha do Bootstrap -->
+
+      <!-- COLUNA DO AUTOR -->
+      <div class="col-md-3 post-autor">
+      <!-- col-md-3 = 3 colunas no desktop -->
+      <!-- post-autor = estilos do autor -->
+
+        <img 
+          src="{{ url_for('static', filename='fotos_perfil/' ~ post.autor.foto_perfil) }}" 
+          alt="Foto do autor">
+
+        <h6>{{ post.autor.username }}</h6>
+        <!-- Nome do autor -->
+
+        {% for curso in post.autor.cursos.split(';') %}
+          <span class="badge bg-success curso-badge">
+            {{ curso }}
+          </span>
+        {% endfor %}
+        <!-- Lista de cursos -->
+
+      </div>
+
+      <!-- COLUNA DO POST -->
+      <div class="col-md-9 post-conteudo">
+      <!-- col-md-9 = restante do espaço -->
+
+        <a style="text-decoration: none;" href=" {{ url_for('exibir_post', post_id=post.id) }}">
+          <h4>{{ post.titulo }}</h4>
+        </a>
+        <!-- Título do post -->
+
+        <p>{{ post.corpo }}</p>
+        <!-- Texto do post -->
+
+        <p class="text-muted" style="font-size: 13px;">
+          Publicado em {{ post.data_criacao | brasilia_time }}
+        </p>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}

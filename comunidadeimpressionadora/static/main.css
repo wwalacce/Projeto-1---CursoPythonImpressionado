@@ -1,0 +1,230 @@
+/* ===============================
+   CONFIGURAÇÕES GERAIS DA PÁGINA
+   =============================== */
+
+body {
+  background-color: #f4f6f8;          /* Fundo claro institucional */
+  font-family: "Segoe UI", Arial, sans-serif; /* Fonte limpa e profissional */
+}
+
+/* ===============================
+   CONTAINER DOS POSTS
+   =============================== */
+
+.post-wrapper {
+  max-width: 1100px;                  /* Limita largura para leitura confortável */
+  margin: 0 auto;                     /* Centraliza na tela */
+}
+
+/* ===============================
+   CARD DO POST
+   =============================== */
+
+.post-card {
+  background-color: #ffffff;          /* Fundo branco */
+  border-radius: 12px;                /* Cantos arredondados */
+  padding: 24px;                      /* Espaçamento interno */
+  margin-bottom: 24px;                /* Espaço entre os posts */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Sombra suave */
+}
+
+/* ===============================
+   COLUNA DO PERFIL
+   =============================== */
+
+.post-autor {
+  text-align: center;                 /* Centraliza conteúdo do autor */
+  border-right: 1px solid #dee2e6;    /* Linha divisória */
+  padding-right: 16px;                /* Espaço da borda */
+}
+
+/* Foto do perfil */
+.post-autor img {
+  width: 120px;                       /* Largura fixa */
+  height: 120px;                      /* Altura fixa */
+  object-fit: cover;                  /* Mantém proporção */
+  border-radius: 50%;                 /* Imagem circular */
+  border: 3px solid #0b3c5d;          /* Azul institucional SENAPPEN */
+}
+
+/* Nome do autor */
+.post-autor h6 {
+  margin-top: 12px;                   /* Espaço acima */
+  font-weight: 600;                   /* Destaque no nome */
+  color: #0b3c5d;                     /* Azul institucional */
+}
+
+/* Cursos do autor */
+.curso-badge {
+  font-size: 0.75rem;                 /* Texto pequeno */
+  margin-top: 6px;                    /* Espaço entre badges */
+}
+
+/* ===============================
+   CONTEÚDO DO POST
+   =============================== */
+
+.post-conteudo h4 {
+  color: #0b3c5d;                     /* Azul institucional */
+  font-weight: 600;                   /* Destaque */
+  margin-bottom: 12px;                /* Espaço abaixo */
+}
+
+.post-conteudo p {
+  font-size: 1rem;                    /* Tamanho confortável */
+  line-height: 1.7;                  /* Melhor leitura */
+  color: #212529;                    /* Cinza escuro padrão */
+}
+
+/* ===============================
+   PÁGINA DE USUÁRIOS - SENAPPEN
+   =============================== */
+
+/* Container principal */
+.usuarios-wrapper {
+  max-width: 1100px;                 /* Limita largura para leitura */
+  margin: 0 auto;                    /* Centraliza na tela */
+}
+
+/* Título da página */
+.titulo-pagina {
+  color: #0b3c5d;                    /* Azul institucional SENAPPEN */
+  font-weight: 600;                  /* Destaque */
+  margin-bottom: 24px;               /* Espaço abaixo */
+}
+
+/* ===============================
+   CARD DO USUÁRIO
+   =============================== */
+
+.usuario-card {
+  background-color: #ffffff;         /* Fundo branco */
+  border-radius: 12px;               /* Cantos arredondados */
+  padding: 24px;                     /* Espaçamento interno */
+  margin-bottom: 24px;               /* Espaço entre usuários */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Sombra leve */
+}
+
+/* ===============================
+   FOTO DO USUÁRIO
+   =============================== */
+
+.usuario-foto {
+  width: 160px;                      /* Largura fixa */
+  height: 160px;                     /* Altura fixa */
+  border-radius: 50%;                /* Imagem circular */
+  object-fit: cover;                 /* Mantém proporção */
+  border: 3px solid #0b3c5d;         /* Azul institucional */
+}
+
+/* ===============================
+   DADOS DO USUÁRIO
+   =============================== */
+
+.usuario-nome {
+  color: #0b3c5d;                    /* Azul institucional */
+  font-weight: 600;                  /* Destaque */
+}
+
+.usuario-email {
+  color: #6c757d;                    /* Cinza Bootstrap */
+  font-size: 0.95rem;                /* Texto discreto */
+}
+
+/* ===============================
+   ESTATÍSTICAS
+   =============================== */
+
+.usuario-stats {
+  display: flex;                     /* Flexbox */
+  gap: 24px;                         /* Espaço entre blocos */
+  margin-top: 12px;                  /* Espaço acima */
+}
+
+.stat-box {
+  background-color: #0b3c5d;         /* Fundo azul institucional */
+  color: #ffffff;                    /* Texto branco */
+  padding: 10px 16px;                /* Espaçamento interno */
+  border-radius: 8px;                /* Cantos arredondados */
+  text-align: center;                /* Centraliza texto */
+}
+
+.stat-label {
+  font-size: 0.8rem;                 /* Texto pequeno */
+}
+
+.stat-numero {
+  font-size: 1.2rem;                 /* Número em destaque */
+  font-weight: 600;
+}
+
+/* ===============================
+   CURSOS
+   =============================== */
+
+.usuario-cursos {
+  margin-top: 16px;                  /* Espaço acima */
+}
+
+.curso-badge {
+  margin: 6px 4px 0 0;               /* Espaçamento entre badges */
+  font-size: 0.75rem;                /* Texto pequeno */
+}
+/* ============================
+   PÁGINA CRIAR POST
+   ============================ */
+
+/* Centraliza e limita a largura do formulário */
+.form-criar-post {
+    max-width: 700px;          /* Evita formulário largo demais em telas grandes */
+    margin: 0 auto;            /* Centraliza horizontalmente */
+}
+
+/* Estilo geral do formulário */
+.form-criar-post form {
+    background-color: #ffffff; /* Fundo branco para contraste */
+    border-radius: 8px;        /* Bordas arredondadas */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Título "Criar Post" */
+.form-criar-post legend h1 {
+    font-size: 2rem;           /* Tamanho confortável do título */
+    font-weight: 600;          /* Deixa o título mais forte */
+    text-align: center;        /* Centraliza o título */
+    margin-bottom: 1.5rem;     /* Espaço abaixo do título */
+}
+
+/* Espaçamento entre os campos */
+.form-group {
+    margin-bottom: 1.2rem;     /* Espaço entre inputs */
+}
+
+/* Labels dos campos */
+.form-control-label {
+    font-weight: 500;          /* Deixa o texto mais legível */
+    margin-bottom: 0.4rem;     /* Espaço entre label e input */
+}
+
+/* Campo de texto (input e textarea) */
+.form-control {
+    border-radius: 6px;        /* Bordas mais suaves */
+}
+
+/* Textarea (campo corpo do post) */
+textarea.form-control {
+    min-height: 150px;         /* Altura mínima para evitar campo pequeno */
+    resize: vertical;          /* Permite redimensionar só para baixo */
+}
+
+/* Botão Criar Post */
+.btn-primary {
+    width: 100%;               /* Botão ocupa toda a largura */
+    font-size: 1.1rem;         /* Texto do botão maior */
+    padding: 0.6rem;           /* Espaçamento interno */
+}
+
+/* Mensagens de erro */
+.invalid-feedback {
+    font-size: 0.9rem;         /* Texto menor para erros */
+}

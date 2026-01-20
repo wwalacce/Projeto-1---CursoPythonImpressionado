@@ -1,0 +1,21 @@
+
+
+pip install flask                 # Framework web principal (rotas, servidor, templates, requisições)
+pip install flask-sqlalchemy       # Integração do Flask com banco de dados usando ORM
+pip install flask-login            # Controle de autenticação e sessão de usuários
+pip install flask-wtf              # Integração de formulários com proteção CSRF
+pip install wtforms                # Biblioteca de campos e validações de formulários
+pip install email-validator        # Validação de endereços de e-mail
+pip install pillow                 # Processamento e manipulação de imagens
+pip install python-dotenv          # Leitura de variáveis de ambiente a partir de arquivos .env
+pip install werkzeug               # Utilitários WSGI, segurança e suporte interno do Flask
+pip install gunicorn               # Servidor WSGI para execução da aplicação em produção
+
+Deploy do Site COnfigurações
+
+1 - Intalar a biblioteca gunicord
+2 - criar um arquivo chamado Procfile (sem extensão mesmo)
+  no texto do arquivo colocar: web: gunicorn main:app
+2 - Criar o arquivo requirement.txt
+    1 - No terminal, digitar: pip freezer > requiriments.txt 
+  
