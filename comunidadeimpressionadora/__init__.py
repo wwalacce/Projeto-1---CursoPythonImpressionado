@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = '8f258f0a3405ab66b037fc19e3d66496'  # Configuração 
 
 # Configurando o caminho LOCAL do banco de dados
 if os.getenv("DATABASE_URL"):
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 else:
      app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 
