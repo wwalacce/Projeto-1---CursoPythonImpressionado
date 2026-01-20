@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager # Importando a extensão para login
 import pytz  # Biblioteca de timezone
+import os
 
 
 app = Flask(__name__) # Interliga diversas partes do site
@@ -10,8 +11,10 @@ app = Flask(__name__) # Interliga diversas partes do site
 app.config['SECRET_KEY'] = '8f258f0a3405ab66b037fc19e3d66496'  # Configuração da chave secreta para segurança dos formulários
 
 # Configurando o caminho LOCAL do banco de dados
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
+if os.getenv("DATABASE_URL"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+else:
+     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 
 #As barras dizem pra criar o banco de dados no mesmo local onde estão os outros arquivos.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
